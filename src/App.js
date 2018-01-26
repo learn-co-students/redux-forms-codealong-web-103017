@@ -1,14 +1,16 @@
-import React, { Component } from 'react';
-import CreateTodo from './components/todos/CreateTodo'
+import React from 'react';
+import ReactDOM from 'react-dom';
+import App from './App';
+import manageTodo from './reducers/manageTodo';
+import createStore from './createStore';
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <CreateTodo store={this.props.store} />
-      </div>
-    );
-  }
+let store = createStore(manageTodo);
+
+export function render() {
+  ReactDOM.render(
+    <App store={store} />,
+    document.getElementById('root')
+  );
 }
 
-export default App;
+store.dispatch({ type: '@@INIT' });
